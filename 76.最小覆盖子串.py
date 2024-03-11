@@ -12,21 +12,21 @@ class Solution:
         left, right = 0, 0
         
         dictionary = defaultdict(int)
+        count = defaultdict(int)
         
         for x in t:
             dictionary[x] += 1
             
         min_length = len(s) + 1
-        count = defaultdict(int)
         res = ''
-        while left < len(s) and right < len(s):
+        
+        while left < len(s):
             while s[left] not in t:
                 left += 1
-                right = max(left, right)
-                if right >= len(s):
+                if left >= len(s):
                     return res
+            right = max(left, right)
                 
-
             for key, cnt in dictionary.items():
                 while count[key] < cnt and right < len(s):
                     count[s[right]] +=1
@@ -41,9 +41,6 @@ class Solution:
 
             count[s[left]] -= 1  
             left += 1
-            
-            
-            
         return res
             
         
